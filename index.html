@@ -29,7 +29,7 @@
 
                 <div class="col-md-5 center-item">
                   <div class="input-group number-spinner">
-                    <button id="iphoneCountMinusBtn" class="btn btn-default">
+                    <button id="iphoneCountMinusBtn" class="btn btn-default" disabled>
                       <i class="fas fa-minus"></i>
                     </button>
                     <input
@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-md-5 center-item">
                   <div class="input-group number-spinner">
-                    <button id="iphoneCaseMinusBtn" class="btn btn-default">
+                    <button id="iphoneCaseMinusBtn" class="btn btn-default" disabled>
                       <i class="fas fa-minus"></i>
                     </button>
                     <input
@@ -103,28 +103,29 @@
       //Plus Button Handle
        const iphoneCountPlusBtn = document.getElementById("iphoneCountPlusBtn");
        iphoneCountPlusBtn.addEventListener("click", function () {
-          cartItemIncrease("iphoneCount", "iphonePrice");
+          cartItemIncrease("iphoneCount", "iphonePrice", "iphoneCountMinusBtn");
        });
        const iphoneCasePlusBtn = document.getElementById("iphoneCasePlusBtn");
        iphoneCasePlusBtn.addEventListener("click", function () {
-          cartItemIncrease("iphoneCaseCount", "iphoneCasePrice");
+          cartItemIncrease("iphoneCaseCount", "iphoneCasePrice", "iphoneCaseMinusBtn");
        });
 
        //Minus Button Handle
        const iphoneCountMinusBtn = document.getElementById("iphoneCountMinusBtn");
        iphoneCountMinusBtn.addEventListener("click", function () {
-          cartItemDecrease("iphoneCount", "iphonePrice");
+          cartItemDecrease("iphoneCount", "iphonePrice","iphoneCountMinusBtn");
        });
        const iphoneCaseMinusBtn = document.getElementById("iphoneCaseMinusBtn");
        iphoneCaseMinusBtn.addEventListener("click", function () {
-          cartItemDecrease("iphoneCaseCount", "iphoneCasePrice");
+          cartItemDecrease("iphoneCaseCount", "iphoneCasePrice","iphoneCaseMinusBtn");
        });
 
-      function cartItemIncrease(valueCount, valuePrice) {
+      function cartItemIncrease(valueCount, valuePrice, btnName) {
          //Cart Item Increase
           let itemCount = parseFloat(document.getElementById(valueCount).value);
           itemCount++;
           document.getElementById(valueCount).value = itemCount;
+          document.getElementById(btnName).removeAttribute("disabled");
 
           //Item Price Increase
           let itemPrice = parseFloat(document.getElementById(valuePrice).innerText);
@@ -136,7 +137,7 @@
           }
           document.getElementById(valuePrice).innerText = itemPrice;
       }
-      function cartItemDecrease(valueCount, valuePrice) {
+      function cartItemDecrease(valueCount, valuePrice, btnName) {
           let itemCount = parseFloat(document.getElementById(valueCount).value);
           if(itemCount>=2){
              itemCount--;
@@ -148,6 +149,7 @@
           itemPrice = (itemPrice / (itemCount+1))*itemCount;
          }else{
                itemPrice = itemPrice/2;
+               document.getElementById(btnName).setAttribute("disabled", "");
          }
          document.getElementById(valuePrice).innerText = itemPrice;
       }
