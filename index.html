@@ -100,6 +100,20 @@
       </div>
     </section>
     <script>
+      // remove-item Button Handle
+      const removeBtn = document.getElementsByClassName("remove-item");
+      removeBtn[0].addEventListener("click", function(){
+        const cartItem = document.getElementsByClassName("cart-item");
+        cartItem[0].remove();
+        document.getElementById("subTotal").innerText = 59;
+        document.getElementById("total").innerText = 59;
+      });
+      removeBtn[1].addEventListener("click", function(){
+        const cartItem = document.getElementsByClassName("cart-item");
+        cartItem[0].remove();
+        document.getElementById("subTotal").innerText = 0;
+        document.getElementById("total").innerText = 0;
+      });
       //Plus Button Handle
        const iphoneCountPlusBtn = document.getElementById("iphoneCountPlusBtn");
        iphoneCountPlusBtn.addEventListener("click", function () {
